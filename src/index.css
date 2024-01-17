@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'poppins';
+  src: local('poppins') format('otf'), url('../utils/poppins/Poppins-Regular.otf'),
+    url('../utils/poppins/Poppins-Bold.otf'),
+    url('../utils/poppins/Poppins-BlackItalic.otf'),
+    url('../utils/poppins/Poppins-Black.otf'),
+    url('../utils/poppins/Poppins-ExtraBold.otf'),
+    url('../utils/poppins/Poppins-ExtraBoldItalic.otf'),
+    url('../utils/poppins/Poppins-ExtraLight.otf'),
+    url('../utils/poppins/Poppins-ExtraLightItalic.otf'),
+    url('../utils/poppins/Poppins-Italic.otf'),
+    url('../utils/poppins/Poppins-Light.otf'),
+    url('../utils/poppins/Poppins-LightItalic.otf'),
+    url('../utils/poppins/Poppins-Medium.otf'),
+    url('../utils/poppins/Poppins-MediumItalic.otf'),
+    url('../utils/poppins/Poppins-Regular.otf'),
+    url('../utils/poppins/Poppins-SemiBold.otf'),
+    url('../utils/poppins/Poppins-SemiBoldItalic.otf'),
+    url('../utils/poppins/Poppins-Thin.otf'),
+    url('../utils/poppins/Poppins-ThinItalic.otf'),
+
+}
+
+* {
+  scroll-behavior: smooth;
+  /* background-color: red; */
+  padding: 0;
+  margin: 0;
+  font-family: 'poppins';
+}
+.flex {
+  display: flex;
+}
+
+.none {
+  display: none;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.aic {
+  align-items: center;
+}
+
+.ais {
+  align-items: stretch;
+}
+
+.aife {
+  align-items: flex-end;
+}
+
+.aifs {
+  align-items: flex-start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.jcfe {
+  justify-content: flex-end;
+}
+
+.jcfs {
+  justify-content: flex-start;
+}
+
+.jcsa {
+  justify-content: space-around;
+}
+
+.jcse {
+  justify-content: space-evenly;
+}
+
+.jcsb {
+  justify-content: space-between;
+}
+
+.fdc {
+  flex-direction: column;
+}
+
+.fdr {
+  flex-direction: row;
+}
+
+.fdrr {
+  flex-direction: row-reverse;
+}
+
+.obfct {
+  object-fit: contain;
+}
+
+.obfcv {
+  object-fit: cover;
+}
+
+.bgr {
+  background-color: red;
+}
+
+.bgb {
+  background-color: blue;
+}
+
+.bgg {
+  background-color: green;
+}
+
+.bgb {
+  background-color: black;
+}
+
+.bgw {
+  background-color: white;
+}
+
+.bgt {
+  background-color: transparent;
+}
+
+.black {
+  color: black;
+}
+
+.brown {
+  background-color: brown;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.flex3 {
+  flex: 3;
+}
+
+.flex4 {
+  flex: 4;
+}
+
+.flex5 {
+  flex: 5;
+}
+
+.flex6 {
+  flex: 6;
+}
+
+.flex7 {
+  flex: 7;
+}
+
+.cp {
+  cursor: pointer;
+}
