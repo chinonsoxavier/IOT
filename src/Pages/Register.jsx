@@ -8,6 +8,8 @@ import { tablet } from "../responsive";
 import { useContext } from "react";
 import { UserContext } from "../context/context";
 import { useEffect } from "react";
+import { api_endPoint } from "../api_endPoint";
+import { EmailAlert, ErrorAlert } from "../alerts";
 const Container = styled.div`
   width: 100vw;
   height: 100dvh;
@@ -183,7 +185,6 @@ const InputFile = styled.input`
 `;
 
 const Register = () => {
-  // const navigate = useNavigate();
   const user = useContext(UserContext)
   const passWordRef = useRef(null);
   const passWordMatchRef = useRef(null);
@@ -214,42 +215,15 @@ const Register = () => {
     }
   };
 
-  const ErrorAlert = (message) =>
-    toast.error(message, {
-      bodyClassName: "ToastifyLoginError",
-      position: "bottom-center",
-      fontSize: "2px",
-      autoClose: 5000,
-      hideProgressBar: false,
-      newestOnTop: true,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      draggable: true,
-      pauseOnHover: true,
-      theme: "light",
-      rtl: false,
-    });
-  const EmailAlert = (message) =>
-    toast.info(message, {
-      bodyClassName: "ToastifyLoginError",
-      position: "bottom-center",
-      fontSize: "2px",
-      autoClose: 5000,
-      hideProgressBar: false,
-      newestOnTop: true,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      draggable: true,
-      pauseOnHover: true,
-      theme: "light",
-      rtl: false,
-    });
+  
   const validatePasswordComfirm = (password, passMatch) => {
     return password === passMatch;
   };
 const ValidateEmail = (email)=>{
   //  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-  return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+  // return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+  const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regex.test(email)
 }
 
   const handleSubmit = async (e) => {
@@ -265,17 +239,6 @@ const ValidateEmail = (email)=>{
      ErrorAlert(
        "Passwords do not match, make sure both passwords match correctly"
      );
-    // } else if (!validatePassword(password)) {
-    //   ErrorAlert(
-    //     <div className="register_validatePassword" >
-    //       <span>Password must contain:</span>
-    //       <ul>
-    //         <li>at least 8 characters long</li>
-    //         <li>at least one letter</li>
-    //         <li>at least one number</li>
-    //       </ul>
-    //     </div>
-    //   );
     } 
     else if(!ValidateEmail(email)){
       ErrorAlert('Please enter a valid email address')
@@ -286,24 +249,21 @@ const ValidateEmail = (email)=>{
       formData.append("email", email);
       formData.append("password", password);
       try {
-        // const res=  await axios.post("https://industrialiot.onrender.com/api/register", {
-        //   "username":username,
-        //   'email':email,
-        //   "password":password
-        // });
-        // console.log(res)
+        const res=  await axios.post(`${api_endPoint}register`, {
+          "username":username,
+          'email':email,
+          "password":password
+        });
+        console.log(res)
 
         EmailAlert(`please check your email ${email} to activate your account`);
-        // dispatchUserEvent("Register", { email: email });
-        // sessionStorage.setItem("user", "user");
-        // sessionStorage.setItem('email',email);
         dispatchUserEvent("Register", {email:email});
 
 
         navigate("/otp-verification");
       } catch (err) {
-        console.log(err.response.data.Error);
-        ErrorAlert(err.response.data.Error)
+        console.log(err?.response.data.Error);
+        ErrorAlert(err?.response.data.Error)
       }
     }
   };
@@ -347,6 +307,7 @@ const ValidateEmail = (email)=>{
                 type="email"
                 placeholder="youremail@example.com"
                 onChange={(e) => handleSubmitInputChange(e, "email")}
+                required
               />
             </InputCon>
             <InputCon>

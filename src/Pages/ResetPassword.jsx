@@ -170,9 +170,11 @@ const InputContainer = styled.div`
 function ResetPassword() {
 
   const user = useContext(UserContext);
-  const dispatchUserEvent = useContext(UserContext);
+  const {dispatchUserEvent} = useContext(UserContext);
   const [newPassword, setNewPassword] = useState();
   const [oldPassword, setOldPassword] = useState();
+  const [email,setEmail]=useState()
+  const navigate = useNavigate();
   // console.log(user);
   const PasswordInputRef = useRef([]);
   const [resetPass, setResetPass] = useState(true);
@@ -221,7 +223,7 @@ function ResetPassword() {
   const handleResetPassword =async () => {
     try{
       const res = await axios.put(
-        "https://industrialiot.onrender.com/api/resetpass",
+        "resetpass",
         {
           oldpass: oldPassword,
           newpass: newPassword,
@@ -235,6 +237,31 @@ SucessAlert(res.response.data.sucess);
       
     }
 }
+
+const sendResetPassOtp = async ()=>{
+  try {
+     await axios.get(
+       "resetpass",
+       {},
+       {
+         headers: {
+           email: email,
+         },
+       }
+     );
+     navigate('/verify-reset-password-token')
+  } catch (error) {
+    console.log(error)
+            ErrorAlert(error.response.data.Error);
+
+  }
+}
+
+const Logout = ()=>{
+  dispatchUserEvent("LOGOUT");
+}
+
+
 
   return (
     <Container className="flex aic jcc">
@@ -252,7 +279,7 @@ SucessAlert(res.response.data.sucess);
             reset your password!.
           </HeaderSmText>
         </Header>
-        {user.user.accessToken ? (
+        {!user.user.accessToken ? (
           <>
             <InputCon>
               <InputLabel htmlFor="resetPassword">Email</InputLabel>
@@ -260,13 +287,15 @@ SucessAlert(res.response.data.sucess);
                 <Input
                   placeholder="Enter your account email"
                   type="email"
-                  id="resetPassword"
+                  id="resetPassword email"
                   className=""
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </InputWrapper>
             </InputCon>
             <ButtonCon className="flex aic jcc">
-              <Button>Send Otp</Button>
+              <Button onClick={sendResetPassOtp}>Send Otp</Button>
               <Link className="link" to="/login">
                 <Button type="outline" style={{ textDecoration: "underline" }}>
                   Return to login
@@ -372,13 +401,25 @@ SucessAlert(res.response.data.sucess);
                 </InputContainer>
               </Input2Con>
             </ResetPassCon>
-            <Back className="flex aic jcc w100">
+            <Back className="flex aic jcse fdc w100">
               <BackBtn
                 onClick={handleResetPassword}
                 className="button_transition flex aic jcc"
               >
                 Reset Password
               </BackBtn>
+              <div>
+                <p
+                  style={{
+                    color: "red",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                  onClick={Logout}
+                >
+                  forgot password?
+                </p>
+              </div>
             </Back>
           </ResetPassWrapper>
         )}

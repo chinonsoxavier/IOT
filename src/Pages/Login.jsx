@@ -6,9 +6,9 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 // import { tablet } from "../responsive";
-import {toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { tablet } from "../responsive";
+import { ErrorAlert } from "../alerts";
 const Container = styled.div`
   width: 100vw;
   height: 100dvh;
@@ -199,21 +199,6 @@ const Login = () => {
     // alert
   };
 
-  const ErrorAlert = (message) =>
-    toast.error(message, {
-      bodyClassName: "ToastifyLoginError",
-      position: "bottom-center",
-      fontSize: "2px",
-      autoClose: 5000,
-      hideProgressBar: false,
-      newestOnTop: true,
-      closeOnClick: true,
-      pauseOnFocusLoss: true,
-      draggable: true,
-      pauseOnHover: true,
-      theme: "light",
-      rtl: false,
-    });
   // ErrorAlert();
   const ToggleVisibility = () => {
     const passwordDisplayType = PasswordInputRef.current.type;

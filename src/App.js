@@ -10,6 +10,8 @@ import Home from "./Pages/Home";
 import ResetPassword from "./Pages/ResetPassword";
 import { ToastContainer } from "react-toastify";
 import UsersList from "./Pages/UsersList";
+import axios from "axios";
+import ResetPasswordOtp from "./Pages/ResetPasswordOtp";
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
     accessToken: sessionStorage.getItem("accessToken") || null,
   });
 
-  const dispatchUserEvent = (actionType, payload) => {
+  const dispatchUserEvent = async (actionType, payload) => {
     switch (actionType) {
       case "Register":
         setUser({
@@ -31,6 +33,19 @@ function App() {
         });
       default:
         break;
+        case "LOGOUT":
+          try {
+             await axios.post('logout',{},{
+              headers:{
+                Authorization:`Bearer ${sessionStorage.getItem("accessToken")}`,
+                'Content-Type':"application/json"
+              }
+            })
+
+          } catch (error) {
+            console.log(error)
+          }
+          sessionStorage.removeItem("accessToken")
     }
   };
 
@@ -62,6 +77,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/users-list" element={<UsersList />} />
         <Route path="/otp-verification" element={<VerifyOTP />} />
+        <Route path="/verify-reset-password-token" element={<ResetPasswordOtp />} />
       </Routes>
       {/* </BrowserRouter> */}
     </UserContext.Provider>

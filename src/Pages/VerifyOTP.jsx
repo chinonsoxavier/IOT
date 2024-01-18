@@ -8,6 +8,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../context/context";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   width: 100vw;
   height: 100dvh;
@@ -93,6 +94,7 @@ const VerifyOTP = () => {
   const dispatchUserEvent = useContext(UserContext);
   const [newEmail, setNewEmail] = useState(user.user.email);
   console.log(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // sessionStorage.setItem("email", user.user.email);
@@ -110,7 +112,7 @@ const VerifyOTP = () => {
   const handleSubmit = async () => {
     try {
       const res = await axios.get(
-        "https://industrialiot.onrender.com/api/verifyemail",
+        "verifyemail",
         {
           email: user.user.email,
         }
@@ -130,7 +132,7 @@ const VerifyOTP = () => {
    try {
      console.log(newEmail);
      const res = await axios.put(
-       "https://industrialiot.onrender.com/api/verifyemail",
+       "verifyemail",
        {
          email: user.user.email,
          newEmail: newEmail,
@@ -144,6 +146,15 @@ const VerifyOTP = () => {
   
   
   const  handleEmailUpdate =async ()=>{
+    try {
+      const res = await axios.post("verifyemail",{
+       otp:otp,
+       email:user.user.email,
+      });
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
     // sessionStorage.setItem("email", newEmail);
     dispatchUserEvent("Register", { email: newEmail });
     // setNewEmail();
@@ -213,9 +224,22 @@ const VerifyOTP = () => {
               Continue
             </Button>
           ) : (
-            <Button className="cp" type="submit" onClick={handleSubmit}>
-              VERIFY
-            </Button>
+            <div className="flex aic jcc fdc" style={{ gap: "10px" }}>
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "14px",
+                  lineHeight: "18px",
+                }}
+              >
+                Did`nt recieve otp?
+                <br />
+                <b style={{color:"#2563eb",cursor:"pointer"}} >Resend</b>
+              </p>
+              <Button className="cp" type="submit" onClick={handleEmailUpdate}>
+                VERIFY
+              </Button>
+            </div>
           )}
         </ButtonCon>
         {/* <div>

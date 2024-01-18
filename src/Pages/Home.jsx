@@ -43,7 +43,7 @@ const Navbar = styled.div`
   z-index: 999;
   // border-bottom:1px solid white;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-  ${stablet({ padding: "10px 20px" })};
+  ${stablet({ padding: "30px 20px" })};
 `;
 const NavbarLeft = styled.div`
 flex:1;
@@ -220,16 +220,16 @@ const Home = () => {
             <SideMenuButton>LOGOUT</SideMenuButton>
           ) : (
             <>
+                <Link to='/register' className='link flex aic jcc fdc w100' style={{width:"100%"}} >
               <SideMenuButton outline>
-                <Link to='/register' className='link'>
                   Register
-                </Link>
               </SideMenuButton>
+                </Link>
+                <Link to='/login' className="link flex aic jcc fdc w100" style={{width:"100%"}} >
               <SideMenuButton>
-                <Link to='/login' className="link">
                   Login
-                </Link>
               </SideMenuButton>
+                </Link>
             </>
           )}
         </SideMenuCon>

@@ -135,8 +135,11 @@ const TableCon = styled.div`
   background: white;
   overflow: hidden;
   height: 100%;
-  height: 450px;
-  ${stablet({ display: "none" })};
+  height: 550px;
+  ${stablet({ display: "none",maxHeight:"450px",height:"100%" })};
+`;
+const TableHeaderWrapper = styled.div`
+  background: #dbeafe;
 `;
 const TableHeaderCon = styled.div`
   border: 1px solid #eee;
@@ -302,16 +305,20 @@ const UsersList = () => {
           <SideMenuButton>LOGOUT</SideMenuButton>
         ) : (
           <>
-            <SideMenuButton outline>
-              <Link to="/register" className="link">
-                Register
-              </Link>
-            </SideMenuButton>
-            <SideMenuButton>
-              <Link to="/login" className="link">
-                Login
-              </Link>
-            </SideMenuButton>
+            <Link
+              to="/register"
+              className="link flex aic jcc fdc w100"
+              style={{ width: "100%" }}
+            >
+              <SideMenuButton outline>Register</SideMenuButton>
+            </Link>
+            <Link
+              to="/login"
+              className="link flex aic jcc fdc w100"
+              style={{ width: "100%" }}
+            >
+              <SideMenuButton>Login</SideMenuButton>
+            </Link>
           </>
         )}
       </SideMenuCon>
@@ -325,6 +332,15 @@ const UsersList = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    
+    const GetUsers =async ()=>{
+      const res = await axios.get("users")
+    }
+  
+  }, [])
+  
 
   const demoUsersList = [
     {
@@ -706,48 +722,61 @@ const ChangePagPage = (direction,page)=>{
             )}
           </NavbarMenu>
         </Navbar>
-        <PaginationsWrapper>
-          <PaginationsCon className="flex aic jcsb wrap w100">
-            <ItemsPerPageCon className="flex aic jcc">
-              <ItemsPerPageText>Items per page</ItemsPerPageText>
-              <Select
-                value={itemsPerpage}
-                onChange={(e) => setItemsPerPage(e.target.value)}
-                sx={{ padding: "", height: "20px", fontSize: "15px" }}
-              >
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={20}>20</MenuItem>
-                <MenuItem value={30}>30</MenuItem>
-              </Select>
-            </ItemsPerPageCon>
-            <PaginationsEntries>
-              <PaginationsEntriesText className="flex aic jcc">
-                <span>{(currentPage - 1) * itemsPerpage + 1}</span>
-                <span>-</span>
-                <span>
-                  {itemsPerpage * currentPage > demoUsersList.length
-                    ? demoUsersList.length
-                    : itemsPerpage * currentPage}
-                </span>
-                <span>of</span>
-                <span>{demoUsersList.length}</span>
-              </PaginationsEntriesText>
-            </PaginationsEntries>
-            <PaginationsButtonsCon className="flex aic jcc">
-              <PaginationsButton onClick={() => ChangePagPage("backward", 2)}>
-                <FirstPage sx={{ fontSize: "inherit" }} />
-              </PaginationsButton>
-              <PaginationsButton onClick={() => ChangePagPage("backward", 1)}>
-                <KeyboardArrowLeft sx={{ fontSize: "inherit" }} />
-              </PaginationsButton>
-              <PaginationsButton onClick={() => ChangePagPage("forward", 1)}>
-                <KeyboardArrowRight sx={{ fontSize: "inherit" }} />
-              </PaginationsButton>
-              <PaginationsButton onClick={() => ChangePagPage("forward", 2)}>
-                <LastPage sx={{ fontSize: "inherit" }} />
-              </PaginationsButton>
-            </PaginationsButtonsCon>
-            {/* <Paginations>
+      </NavbarCon>
+      <Container className="flex aic jcc fdc">
+        <Wrapper className="flex aic jcc fdc ">
+          <TableCon className="">
+            <TableHeaderWrapper>
+              <PaginationsWrapper>
+                <PaginationsCon className="flex aic jcsb wrap w100">
+                  <ItemsPerPageCon className="flex aic jcc">
+                    <ItemsPerPageText>Items per page</ItemsPerPageText>
+                    <Select
+                      value={itemsPerpage}
+                      onChange={(e) => setItemsPerPage(e.target.value)}
+                      sx={{ padding: "", height: "20px", fontSize: "15px" }}
+                    >
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                      <MenuItem value={30}>30</MenuItem>
+                    </Select>
+                  </ItemsPerPageCon>
+                  <PaginationsEntries>
+                    <PaginationsEntriesText className="flex aic jcc">
+                      <span>{(currentPage - 1) * itemsPerpage + 1}</span>
+                      <span>-</span>
+                      <span>
+                        {itemsPerpage * currentPage > demoUsersList.length
+                          ? demoUsersList.length
+                          : itemsPerpage * currentPage}
+                      </span>
+                      <span>of</span>
+                      <span>{demoUsersList.length}</span>
+                    </PaginationsEntriesText>
+                  </PaginationsEntries>
+                  <PaginationsButtonsCon className="flex aic jcc">
+                    <PaginationsButton
+                      onClick={() => ChangePagPage("backward", 2)}
+                    >
+                      <FirstPage sx={{ fontSize: "inherit" }} />
+                    </PaginationsButton>
+                    <PaginationsButton
+                      onClick={() => ChangePagPage("backward", 1)}
+                    >
+                      <KeyboardArrowLeft sx={{ fontSize: "inherit" }} />
+                    </PaginationsButton>
+                    <PaginationsButton
+                      onClick={() => ChangePagPage("forward", 1)}
+                    >
+                      <KeyboardArrowRight sx={{ fontSize: "inherit" }} />
+                    </PaginationsButton>
+                    <PaginationsButton
+                      onClick={() => ChangePagPage("forward", 2)}
+                    >
+                      <LastPage sx={{ fontSize: "inherit" }} />
+                    </PaginationsButton>
+                  </PaginationsButtonsCon>
+                  {/* <Paginations>
               <PaginationsButtonsCon className="flex aic jcc">
                 <PaginationsButton style={{ background: "blue" }}>
                   Previous
@@ -761,29 +790,26 @@ const ChangePagPage = (direction,page)=>{
                 </PaginationsButton>
               </PaginationsButtonsCon>
             </Paginations> */}
-          </PaginationsCon>
-        </PaginationsWrapper>
-      </NavbarCon>
-      <Container className="flex aic jcc fdc">
-        <Wrapper className="flex aic jcc fdc ">
-          <TableCon className="">
-            <TableHeaderCon className="">
-              <TableHeader style={{ maxWidth: "100px" }}>
-                <TableHeaderText>ID</TableHeaderText>
-              </TableHeader>
-              <TableHeader>
-                <TableHeaderText>Username</TableHeaderText>
-              </TableHeader>
-              <TableHeader>
-                <TableHeaderText>Email</TableHeaderText>
-              </TableHeader>
-              <TableHeader>
-                <TableHeaderText>Role</TableHeaderText>
-              </TableHeader>
-              <TableHeader>
-                <TableHeaderText>Verified</TableHeaderText>
-              </TableHeader>
-            </TableHeaderCon>
+                </PaginationsCon>
+              </PaginationsWrapper>
+              <TableHeaderCon className="">
+                <TableHeader style={{ maxWidth: "100px" }}>
+                  <TableHeaderText>ID</TableHeaderText>
+                </TableHeader>
+                <TableHeader>
+                  <TableHeaderText>Username</TableHeaderText>
+                </TableHeader>
+                <TableHeader>
+                  <TableHeaderText>Email</TableHeaderText>
+                </TableHeader>
+                <TableHeader>
+                  <TableHeaderText>Role</TableHeaderText>
+                </TableHeader>
+                <TableHeader>
+                  <TableHeaderText>Verified</TableHeaderText>
+                </TableHeader>
+              </TableHeaderCon>
+            </TableHeaderWrapper>
             <Table className="custom_scrollbar">
               {currentPageData.map((users, index) => (
                 <TableRows key={index}>
@@ -814,7 +840,10 @@ const ChangePagPage = (direction,page)=>{
           </TableCon>
           <MobileTableCon className="custom_scrollbar">
             {currentPageData.map((users, index) => (
-              <MobileTable style={{background:index % 2 ===0 ? "#f3f4fc":"white"}} className="">
+              <MobileTable
+                style={{ background: index % 2 === 0 ? "#f3f4fc" : "white" }}
+                className=""
+              >
                 <MobileTableColumns className="flex aic jcsb">
                   <MobileTableKey>ID</MobileTableKey>
                   <MobileTableValue>{users.id}</MobileTableValue>
@@ -833,7 +862,11 @@ const ChangePagPage = (direction,page)=>{
                 </MobileTableColumns>
                 <MobileTableColumns className="flex aic jcsb">
                   <MobileTableKey>Verified-Email</MobileTableKey>
-                  <MobileTableValue style={{color:users.verifiedEmail ? "blue":"red"}} > {users.verifiedEmail ? "Yes":"No"}
+                  <MobileTableValue
+                    style={{ color: users.verifiedEmail ? "blue" : "red" }}
+                  >
+                    {" "}
+                    {users.verifiedEmail ? "Yes" : "No"}
                   </MobileTableValue>
                 </MobileTableColumns>
               </MobileTable>
