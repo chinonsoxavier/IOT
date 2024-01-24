@@ -27,7 +27,7 @@
   padding: 0;
   margin: 0;
   font-family: 'poppins';
-  height:100vh;
+  /* height:100vh; */
 }
 .flex {
   display: flex;
