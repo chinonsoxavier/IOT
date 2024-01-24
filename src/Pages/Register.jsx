@@ -12,7 +12,7 @@ import { api_endPoint } from "../api_endPoint";
 import { EmailAlert, ErrorAlert } from "../alerts";
 const Container = styled.div`
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   background: #dbeafe;
   color: #3c3c3c;
 `;

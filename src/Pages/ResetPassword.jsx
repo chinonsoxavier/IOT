@@ -12,7 +12,7 @@ import axios from "axios";
 
 const Container = styled.div`
   width: 100dvw;
-  height: 100dvh;
+  height: 100vh;
   background: #dbeafe;
   color: #3c3c3c;
 `;

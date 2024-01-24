@@ -4,8 +4,8 @@ import { SLaptop, stablet, tablet } from "../responsive";
 import { useState } from "react";
 
 const Container = styled.div`
-  width: 100dvw;
-  height: 100dvh;
+  width: 100vw;
+  height: 100vh;
   background: #dbeafe;
   color: #3c3c3c;
 `;

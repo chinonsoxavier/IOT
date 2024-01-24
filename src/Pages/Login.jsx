@@ -11,7 +11,7 @@ import { tablet } from "../responsive";
 import { ErrorAlert } from "../alerts";
 const Container = styled.div`
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   background: #dbeafe;
   color: #3c3c3c;
 `;

@@ -12,7 +12,7 @@ import { UserContext } from "../context/context";
 const Con = styled.div`
   position: relative;
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   background: #dbeafe;
 `;
 
