@@ -47,7 +47,7 @@ const HeaderBgText = styled.p`
 `;
 const HeaderSmText = styled.p`
 text-align:center;
-font-weight:100;
+font-weight:200;
 font-size:.85rem;
 opacity:.8;
 
@@ -275,7 +275,7 @@ const Logout = ()=>{
           </HeaderImgCon>
           <HeaderBgText>Reset Your Password</HeaderBgText>
           <HeaderSmText>
-            Input your account email and we`ll send an OTP to your Email,To
+            Input your account email and we`ll send an OTP to your email to
             reset your password!.
           </HeaderSmText>
         </Header>

@@ -12,13 +12,13 @@ import { UserContext } from "../context/context";
 const Con = styled.div`
   position: relative;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   background: #dbeafe;
 `;
 
 const Container = styled.div`
   width: 100vw;
-  height: 100dvh;
+  height: 100%;
   background: #dbeafe;
   color: black;
 `;
@@ -172,7 +172,7 @@ const SideMenuCon = styled.div`
   left: 0;
   z-index: 99999;
   width: 0;
-  height: 100dvh;
+  height: 100vh;
   background: rgba(255, 255, 255, 0.9);
   background: whitesmoke;
   top: 0;

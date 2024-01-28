@@ -15,11 +15,12 @@ const Con = styled.div`
   width: 100%;
   height: 100vh;
   background: #dbeafe;
+  overflow:hidden;
 `;
 
 const Container = styled.div`
   width: 100%;
-    // height: 88dvh;
+    height: 85vh;
     // height: 10%;
     // background: red;
   color: black;
@@ -33,28 +34,27 @@ const Container = styled.div`
     ${stablet({padding:"10px 20px"})};
     gap: 1rem;
     width: 100%;
-    // height: 65%;
+    height: 100%;
     box-sizing: border-box;
     position:relative;
   `;
   
   const NavbarCon = styled.div`
     background: #dbeafe;
-
+    height:12vh;
     position: sticky;
     top: 0;
     z-index: 999;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   `;
   const Navbar = styled.div`
     //   height:12dvh;
     width: 100%;
     // background:red;
     padding: 30px 50px;
-    ${stablet({ padding: "30px 20px" })}
-
+    ${stablet({ padding: "30px 20px" })};
     box-sizing: border-box;
     // border-bottom:1px solid white;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   `;
 const NavbarLeft = styled.div`
   flex: 1;
@@ -107,7 +107,7 @@ const SideMenuCon = styled.div`
   left: 0;
   z-index: 99999;
   width: 0;
-  height: 100dvh;
+  height: 100vh;
   background: rgba(255, 255, 255, 0.9);
   background: whitesmoke;
   top: 0;
@@ -132,14 +132,15 @@ const SideMenuButton = styled.button`
 
 const TableCon = styled.div`
   width: 100%;
-  background: white;
   overflow: hidden;
+  // height: 70vh;
   height: 100%;
-  height: 550px;
-  ${stablet({ display: "none",maxHeight:"450px",height:"100%" })};
+  background:green;
+  ${stablet({ display: "none",maxHeight:"100%",height:"100%" })};
 `;
 const TableHeaderWrapper = styled.div`
   background: #dbeafe;
+  background:red;
 `;
 const TableHeaderCon = styled.div`
   border: 1px solid #eee;
@@ -206,7 +207,7 @@ const MobileTableCon = styled.div`
   border-radius: 7px;
   overflow-y: auto;
   height: 100%;
-  height: 450px;
+  // height: 450px;
 `;
 const MobileTable = styled.div`
   margin:5px 0;
@@ -232,7 +233,7 @@ const PaginationsWrapper = styled.div`
   // top:100px;
   padding: 10px 50px;
   ${stablet({ padding: "10px 20px" })}
-
+   display:none;
   box-sizing:border-box;
 `;
 const PaginationsCon = styled.div`
@@ -725,58 +726,48 @@ const ChangePagPage = (direction,page)=>{
       </NavbarCon>
       <Container className="flex aic jcc fdc">
         <Wrapper className="flex aic jcc fdc ">
-          <TableCon className="">
-            <TableHeaderWrapper>
-              <PaginationsWrapper>
-                <PaginationsCon className="flex aic jcsb wrap w100">
-                  <ItemsPerPageCon className="flex aic jcc">
-                    <ItemsPerPageText>Items per page</ItemsPerPageText>
-                    <Select
-                      value={itemsPerpage}
-                      onChange={(e) => setItemsPerPage(e.target.value)}
-                      sx={{ padding: "", height: "20px", fontSize: "15px" }}
-                    >
-                      <MenuItem value={10}>10</MenuItem>
-                      <MenuItem value={20}>20</MenuItem>
-                      <MenuItem value={30}>30</MenuItem>
-                    </Select>
-                  </ItemsPerPageCon>
-                  <PaginationsEntries>
-                    <PaginationsEntriesText className="flex aic jcc">
-                      <span>{(currentPage - 1) * itemsPerpage + 1}</span>
-                      <span>-</span>
-                      <span>
-                        {itemsPerpage * currentPage > demoUsersList.length
-                          ? demoUsersList.length
-                          : itemsPerpage * currentPage}
-                      </span>
-                      <span>of</span>
-                      <span>{demoUsersList.length}</span>
-                    </PaginationsEntriesText>
-                  </PaginationsEntries>
-                  <PaginationsButtonsCon className="flex aic jcc">
-                    <PaginationsButton
-                      onClick={() => ChangePagPage("backward", 2)}
-                    >
-                      <FirstPage sx={{ fontSize: "inherit" }} />
-                    </PaginationsButton>
-                    <PaginationsButton
-                      onClick={() => ChangePagPage("backward", 1)}
-                    >
-                      <KeyboardArrowLeft sx={{ fontSize: "inherit" }} />
-                    </PaginationsButton>
-                    <PaginationsButton
-                      onClick={() => ChangePagPage("forward", 1)}
-                    >
-                      <KeyboardArrowRight sx={{ fontSize: "inherit" }} />
-                    </PaginationsButton>
-                    <PaginationsButton
-                      onClick={() => ChangePagPage("forward", 2)}
-                    >
-                      <LastPage sx={{ fontSize: "inherit" }} />
-                    </PaginationsButton>
-                  </PaginationsButtonsCon>
-                  {/* <Paginations>
+          <PaginationsWrapper>
+            <PaginationsCon className="flex aic jcsb wrap w100">
+              <ItemsPerPageCon className="flex aic jcc">
+                <ItemsPerPageText>Items per page</ItemsPerPageText>
+                <Select
+                  value={itemsPerpage}
+                  onChange={(e) => setItemsPerPage(e.target.value)}
+                  sx={{ padding: "", height: "20px", fontSize: "15px" }}
+                >
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={20}>20</MenuItem>
+                  <MenuItem value={30}>30</MenuItem>
+                </Select>
+              </ItemsPerPageCon>
+              <PaginationsEntries>
+                <PaginationsEntriesText className="flex aic jcc">
+                  <span>{(currentPage - 1) * itemsPerpage + 1}</span>
+                  <span>-</span>
+                  <span>
+                    {itemsPerpage * currentPage > demoUsersList.length
+                      ? demoUsersList.length
+                      : itemsPerpage * currentPage}
+                  </span>
+                  <span>of</span>
+                  <span>{demoUsersList.length}</span>
+                </PaginationsEntriesText>
+              </PaginationsEntries>
+              <PaginationsButtonsCon className="flex aic jcc">
+                <PaginationsButton onClick={() => ChangePagPage("backward", 2)}>
+                  <FirstPage sx={{ fontSize: "inherit" }} />
+                </PaginationsButton>
+                <PaginationsButton onClick={() => ChangePagPage("backward", 1)}>
+                  <KeyboardArrowLeft sx={{ fontSize: "inherit" }} />
+                </PaginationsButton>
+                <PaginationsButton onClick={() => ChangePagPage("forward", 1)}>
+                  <KeyboardArrowRight sx={{ fontSize: "inherit" }} />
+                </PaginationsButton>
+                <PaginationsButton onClick={() => ChangePagPage("forward", 2)}>
+                  <LastPage sx={{ fontSize: "inherit" }} />
+                </PaginationsButton>
+              </PaginationsButtonsCon>
+              {/* <Paginations>
               <PaginationsButtonsCon className="flex aic jcc">
                 <PaginationsButton style={{ background: "blue" }}>
                   Previous
@@ -790,8 +781,10 @@ const ChangePagPage = (direction,page)=>{
                 </PaginationsButton>
               </PaginationsButtonsCon>
             </Paginations> */}
-                </PaginationsCon>
-              </PaginationsWrapper>
+            </PaginationsCon>
+          </PaginationsWrapper>
+          <TableCon className="">
+            <TableHeaderWrapper>
               <TableHeaderCon className="">
                 <TableHeader style={{ maxWidth: "100px" }}>
                   <TableHeaderText>ID</TableHeaderText>
@@ -811,7 +804,7 @@ const ChangePagPage = (direction,page)=>{
               </TableHeaderCon>
             </TableHeaderWrapper>
             <Table className="custom_scrollbar">
-              {currentPageData.map((users, index) => (
+              {demoUsersList.map((users, index) => (
                 <TableRows key={index}>
                   <TableColumns
                     style={{
